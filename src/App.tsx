@@ -20,10 +20,20 @@ const socialPlatforms = [
 ];
 
 const maxMessageLength = 200;
+const toneOfVoices = [
+  "Polite",
+  "Funny",
+  "Friendly",
+  "Informal",
+  "Serious",
+  "Optimistic",
+  "Motivational",
+];
 
 const App: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>("");
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -74,6 +84,22 @@ const App: React.FC = () => {
             maxLength={maxMessageLength}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
+        </div>
+        <div className="mb-4">
+          <div className="mb-2 font-bold text-gray-700">Tone of Voice</div>
+          <div className="flex flex-wrap gap-2">
+            {toneOfVoices.map((tone) => {
+              return (
+                <button
+                  className={`py-2 px-4 text-sm bg-white rounded-full border ${selectedToneOfVoice === tone ? "bg-blue-200" : "hover:bg-gray-200"}`}
+                  key={tone}
+                  onClick={() => setSelectedToneOfVoice(tone)}
+                >
+                  {tone}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
