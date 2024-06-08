@@ -19,13 +19,11 @@ const socialPlatforms = [
   },
 ];
 
-/* const hoverStyle = {
- *   filter:
- *     "invert(17%) sepia(91%) saturate(7085%) hue-rotate(128deg) brightness(100%) contrast(106%)",
- * };
- *  */
+const maxMessageLength = 200;
+
 const App: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -58,6 +56,24 @@ const App: React.FC = () => {
               );
             })}
           </div>
+        </div>
+        <div className="mb-4">
+          <div className="flex flex-row justify-between">
+            <label className="mb-2 font-bold text-gray-700" htmlFor="message">
+              Your message
+            </label>
+            <div>
+              {message.length} / {maxMessageLength}
+            </div>
+          </div>
+          <textarea
+            id="message"
+            name="message"
+            className="py-2 px-4 w-full rounded-md border focus:ring-2 focus:ring-blue-200 focus:outline-none"
+            rows={5}
+            maxLength={maxMessageLength}
+            onChange={(e) => setMessage(e.target.value)}
+          ></textarea>
         </div>
       </div>
     </div>
