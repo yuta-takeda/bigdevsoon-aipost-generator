@@ -29,11 +29,13 @@ const toneOfVoices = [
   "Optimistic",
   "Motivational",
 ];
+const postStyles = ["Work", "Opinion", "Case study", "Story", "Tutorial"];
 
 const App: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>("");
+  const [selectedPostStyle, setSelectedPostStyle] = useState<string>("");
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -96,6 +98,22 @@ const App: React.FC = () => {
                   onClick={() => setSelectedToneOfVoice(tone)}
                 >
                   {tone}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="mb-4">
+          <div className="mb-2 font-bold text-gray-700">Post style</div>
+          <div className="flex flex-wrap gap-2">
+            {postStyles.map((style) => {
+              return (
+                <button
+                  className={`py-2 px-4 text-sm bg-white rounded-full border ${selectedPostStyle === style ? "bg-blue-200" : "hover:bg-gray-200"}`}
+                  key={style}
+                  onClick={() => setSelectedPostStyle(style)}
+                >
+                  {style}
                 </button>
               );
             })}
