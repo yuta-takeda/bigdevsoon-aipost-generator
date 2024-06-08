@@ -1,71 +1,40 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import type { SocialPlatform } from "./container";
 
-const socialPlatforms = [
-  {
-    name: "Facebook",
-    icon: "https://img.icons8.com/ios-filled/50/000000/facebook-new.png",
-  },
-  {
-    name: "Twitter",
-    icon: "https://img.icons8.com/ios-filled/50/000000/twitter.png",
-  },
-  {
-    name: "Reddit",
-    icon: "https://img.icons8.com/ios-filled/50/000000/reddit.png",
-  },
-  {
-    name: "LinkedIn",
-    icon: "https://img.icons8.com/ios-filled/50/000000/linkedin.png",
-  },
-];
+interface Props {
+  socialPlatforms: SocialPlatform[];
+  maxMessageLength: number;
+  toneOfVoices: string[];
+  postStyles: string[];
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  setSelectedPlatform: (platform: string) => void;
+  selectedPlatform: string;
+  setMessage: (message: string) => void;
+  message: string;
+  setSelectedToneOfVoice: (tone: string) => void;
+  selectedToneOfVoice: string;
+  setSelectedPostStyle: (style: string) => void;
+  selectedPostStyle: string;
+  isPostable: () => boolean;
+}
 
-const maxMessageLength = 200;
-const toneOfVoices = [
-  "Polite",
-  "Funny",
-  "Friendly",
-  "Informal",
-  "Serious",
-  "Optimistic",
-  "Motivational",
-];
-const postStyles = ["Work", "Opinion", "Case study", "Story", "Tutorial"];
-
-export const Component: React.FC = () => {
-  const [selectedPlatform, setSelectedPlatform] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>("");
-  const [selectedPostStyle, setSelectedPostStyle] = useState<string>("");
-  // const [generatedPost, setGeneratedPost] = useState<string>("");
-
-  const isPostable = () => {
-    return (
-      selectedPlatform && message && selectedToneOfVoice && selectedPostStyle
-    );
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const postMessage = `Generate a ${selectedPlatform} post with a ${selectedToneOfVoice} tone in a ${selectedPostStyle} style with the following message: "${message}". これを日本語でのみ返してください`;
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-    };
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: postMessage }],
-        temperature: 0.7,
-      },
-      { headers: headers },
-    );
-
-    console.log(response.data);
-    console.log(response.data.choices[0].message.content);
-  };
+export const Component: React.FC<Props> = (props) => {
+  const {
+    socialPlatforms,
+    maxMessageLength,
+    toneOfVoices,
+    postStyles,
+    handleSubmit,
+    setSelectedPlatform,
+    selectedPlatform,
+    setMessage,
+    message,
+    setSelectedToneOfVoice,
+    selectedToneOfVoice,
+    setSelectedPostStyle,
+    selectedPostStyle,
+    isPostable,
+  } = props;
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
