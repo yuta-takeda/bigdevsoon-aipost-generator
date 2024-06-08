@@ -32,7 +32,7 @@ const toneOfVoices = [
 ];
 const postStyles = ["Work", "Opinion", "Case study", "Story", "Tutorial"];
 
-const App: React.FC = () => {
+export const Component: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>("");
@@ -167,5 +167,3 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-export default App;
