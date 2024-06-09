@@ -12,6 +12,13 @@ export const Container: React.FC = () => {
     }
 
     (async () => {
+      if (!process.env.REACT_APP_OPENAI_API_KEY) {
+        setGeneratedMessage(
+          "env REACT_APP_OPENAI_API_KEY がセットされていないのデモメッセージを表示しています。REACT_APP_OPENAI_API_KEY をセットして試してください🙇‍",
+        );
+        return;
+      }
+
       const platform = searchParams.get("platform");
       const toneOfVoice = searchParams.get("tone");
       const postStyle = searchParams.get("style");
