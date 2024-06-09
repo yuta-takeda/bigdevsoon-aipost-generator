@@ -17,7 +17,9 @@ export const Container: React.FC = () => {
       const postStyle = searchParams.get("style");
       const message = searchParams.get("message");
 
-      const postMessage = `Generate a ${platform} post with a ${toneOfVoice} tone in a ${postStyle} style with the following message: "${message}". これを日本語でのみ返してください`;
+      const postMessage = `${platform}への投稿を以下の条件で生成してください。言語：日本語、口調：${toneOfVoice}、スタイル：${postStyle}、メッセージ：${message}、文頭と文末の「」や " は不要です`;
+      // `Generate a ${platform} post with a ${toneOfVoice} tone in a ${postStyle} style with the following message: "${message}". これを日本語でのみ返してください`;
+
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
