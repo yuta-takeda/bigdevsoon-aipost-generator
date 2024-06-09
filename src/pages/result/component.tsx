@@ -1,4 +1,5 @@
 import React from "react";
+import { TypingText } from "./Components/TypingText";
 
 interface Props {
   generatedMessage: string;
@@ -13,7 +14,7 @@ export const Component: React.FC<Props> = (props) => {
         Your generated post
       </h1>
       <div className="p-4 rounded-md border-2 border-solid">
-        {generatedMessage}
+        <TypingText text={generatedMessage} />
       </div>
       <div className="flex flex-row gap-4 mt-8">
         <button
