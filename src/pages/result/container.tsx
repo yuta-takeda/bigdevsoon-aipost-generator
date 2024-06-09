@@ -7,6 +7,10 @@ export const Container: React.FC = () => {
   const [generatedMessage, setGeneratedMessage] = useState<string>("");
   const [searchParams] = useSearchParams();
   useEffect(() => {
+    if (generatedMessage !== "") {
+      return;
+    }
+
     (async () => {
       const platform = searchParams.get("platform");
       const toneOfVoice = searchParams.get("tone");
@@ -29,7 +33,16 @@ export const Container: React.FC = () => {
       );
       setGeneratedMessage(response.data.choices[0].message.content);
     })();
-  }, []);
+  }, [generatedMessage]);
 
-  return <Component generatedMessage={generatedMessage} />;
+  const handleRegenerate = () => {
+    setGeneratedMessage("");
+  };
+
+  return (
+    <Component
+      generatedMessage={generatedMessage}
+      handleRegenerate={handleRegenerate}
+    />
+  );
 };

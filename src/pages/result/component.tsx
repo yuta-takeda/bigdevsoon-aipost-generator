@@ -1,12 +1,14 @@
 import React from "react";
 import { TypingText } from "./Components/TypingText";
+import { Link } from "react-router-dom";
 
 interface Props {
   generatedMessage: string;
+  handleRegenerate: () => void;
 }
 
 export const Component: React.FC<Props> = (props) => {
-  const { generatedMessage } = props;
+  const { generatedMessage, handleRegenerate } = props;
 
   return (
     <div className="p-8 w-full max-w-screen-md bg-white rounded-lg shadow-md">
@@ -17,13 +19,15 @@ export const Component: React.FC<Props> = (props) => {
         <TypingText text={generatedMessage} />
       </div>
       <div className="flex flex-row gap-4 mt-8">
-        <button
-          className={`py-2 w-full bg-white border-solid border-2 rounded-md`}
+        <Link
+          to={"/"}
+          className={`py-2 w-full bg-white border-solid border-2 rounded-md text-center`}
         >
-          ← Back to Generator
-        </button>
+          <button>← Back to Generator</button>
+        </Link>
         <button
           className={`py-2 w-full text-white bg-gray-500 rounded-md flex flex-row items-center justify-center gap-2`}
+          onClick={handleRegenerate}
         >
           <img
             src={

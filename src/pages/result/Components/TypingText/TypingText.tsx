@@ -8,6 +8,11 @@ export const TypingText: React.FC<Props> = (props) => {
   const { text } = props;
   const [typingText, setTypingText] = useState<string>("");
   useEffect(() => {
+    if (text === "") {
+      return;
+    }
+
+    setTypingText("");
     const textItr = text[Symbol.iterator]();
     let timerId: NodeJS.Timeout;
 
@@ -31,7 +36,7 @@ export const TypingText: React.FC<Props> = (props) => {
       <p
         className={`${typingText.length >= text.length ? "" : "after:content-['|'] after:animate-blink after:pl-1"}`}
       >
-        {typingText}
+        {text ? typingText : "Generating..."}
       </p>
     </div>
   );
