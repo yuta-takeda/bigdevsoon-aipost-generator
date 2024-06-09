@@ -92,7 +92,7 @@ export const Component: React.FC<Props> = (props) => {
           {toneOfVoices.map((tone) => {
             return (
               <button
-                className={`py-2 px-4 text-sm bg-white rounded-full border ${selectedToneOfVoice === tone ? "bg-blue-200" : "hover:bg-gray-200"}`}
+                className={`py-2 px-4 text-sm rounded-full border ${selectedToneOfVoice === tone ? "bg-blue-200" : "bg-white hover:bg-gray-200"}`}
                 key={tone}
                 onClick={() => setSelectedToneOfVoice(tone)}
                 type="button"
@@ -109,7 +109,7 @@ export const Component: React.FC<Props> = (props) => {
           {postStyles.map((style) => {
             return (
               <button
-                className={`py-2 px-4 text-sm bg-white rounded-full border ${selectedPostStyle === style ? "bg-blue-200" : "hover:bg-gray-200"}`}
+                className={`py-2 px-4 text-sm rounded-full border ${selectedPostStyle === style ? "bg-blue-200" : "bg-white hover:bg-gray-200"}`}
                 key={style}
                 onClick={() => setSelectedPostStyle(style)}
                 type="button"
