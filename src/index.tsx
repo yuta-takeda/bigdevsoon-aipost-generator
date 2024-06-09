@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { HomePage } from "./pages/home";
+import { ResultPage } from "./pages/result";
 import { Routes, Route, Outlet, BrowserRouter } from "react-router-dom";
 
 const Layout = () => {
@@ -21,6 +22,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="/result" element={<ResultPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

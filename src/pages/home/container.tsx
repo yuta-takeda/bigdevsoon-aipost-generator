@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Component } from "./component";
 
 export interface SocialPlatform {
@@ -43,7 +42,6 @@ export const Container: React.FC = () => {
   const [message, setMessage] = useState<string>("");
   const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>("");
   const [selectedPostStyle, setSelectedPostStyle] = useState<string>("");
-  // const [generatedPost, setGeneratedPost] = useState<string>("");
 
   const isPostable = (): boolean => {
     return !!(
@@ -54,37 +52,12 @@ export const Container: React.FC = () => {
     );
   };
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
-    event.preventDefault();
-
-    const postMessage = `Generate a ${selectedPlatform} post with a ${selectedToneOfVoice} tone in a ${selectedPostStyle} style with the following message: "${message}". これを日本語でのみ返してください`;
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-    };
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: postMessage }],
-        temperature: 0.7,
-      },
-      { headers: headers },
-    );
-
-    console.log(response.data);
-    console.log(response.data.choices[0].message.content);
-  };
-
   return (
     <Component
       socialPlatforms={socialPlatforms}
       maxMessageLength={maxMessageLength}
       toneOfVoices={toneOfVoices}
       postStyles={postStyles}
-      handleSubmit={handleSubmit}
       setSelectedPlatform={setSelectedPlatform}
       selectedPlatform={selectedPlatform}
       setMessage={setMessage}
