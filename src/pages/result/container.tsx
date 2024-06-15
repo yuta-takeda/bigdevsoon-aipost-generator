@@ -48,10 +48,16 @@ export const Container: React.FC = () => {
     setGeneratedMessage("");
   };
 
+  const handleCopyText = () => {
+    navigator.clipboard.writeText(generatedMessage);
+    alert("テキストをクリップボードにコピーしました");
+  };
+
   return (
     <Component
       generatedMessage={generatedMessage}
       handleRegenerate={handleRegenerate}
+      handleCopyText={handleCopyText}
     />
   );
 };
